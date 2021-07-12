@@ -1,32 +1,41 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 
-const validateCard = celebrate({
+const validateMovie = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi.string()
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string()
       .required()
       .regex(/^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)#?$/),
+    trailer: Joi.string()
+      .required()
+      .regex(/^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)#?$/),
+    thumbnail: Joi.string()
+      .required()
+      .regex(/^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)#?$/),
+    movieId: Joi.number().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
 
 const validateId = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().required().length(24).hex(),
+    movieId: Joi.string().required().length(24).hex(),
   }),
 });
 
 const {
-  getCards,
-  createCard,
-  deleteCard,
-  likeCard,
-  dislikeCard,
-} = require('../controllers/cards');
+  getMovies,
+  createMovies,
+  deleteMovies,
+} = require('../controllers/movies');
 
-router.get('/', getCards);
-router.post('/', validateCard, createCard);
-router.delete('/:id', validateId, deleteCard);
-router.put('/:id/likes', validateId, likeCard);
-router.delete('/:id/likes', validateId, dislikeCard);
+router.get('/', getMovies);
+router.post('/', validateMovie, createMovies);
+router.delete('/:movieId', validateId, deleteMovies);
 module.exports = router;
