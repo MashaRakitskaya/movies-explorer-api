@@ -1,1 +1,1 @@
-# https://api.rakitskaya.movies.nomoredomains.work
+https://api.rakitskaya.movies.nomoredomains.work
