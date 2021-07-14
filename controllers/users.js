@@ -24,12 +24,11 @@ module.exports.getUserMe = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, email  } = req.body;
+  const { name, email } = req.body;
   User.findByIdAndUpdate(
     req.user._id,
     { name, email },
-    // eslint-disable-next-line comma-dangle
-    { runValidators: true, new: true }
+    { runValidators: true, new: true },
   )
     .orFail(new Error('NotValidId'))
     .then((user) => res.status(200).send(user))
@@ -52,8 +51,7 @@ module.exports.login = (req, res, next) => {
         token: jwt.sign(
           { _id: user._id },
           NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-          // eslint-disable-next-line comma-dangle
-          { expiresIn: '7d' }
+          { expiresIn: '7d' },
         ),
       });
     })
@@ -61,7 +59,6 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  // eslint-disable-next-line object-curly-newline
   const { name, email, password } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
     User.create({
@@ -70,15 +67,11 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
     })
       .then(
-        (user) =>
-          // eslint-disable-next-line implicit-arrow-linebreak
-          res.status(200).send({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            // eslint-disable-next-line comma-dangle
-          })
-        // eslint-disable-next-line function-paren-newline
+        (user) => res.status(200).send({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+        }),
       )
       .catch((err) => {
         if (err.name === 'ValidationError') {

@@ -21,7 +21,8 @@ module.exports.createMovies = (req, res, next) => {
     thumbnail,
     movieId,
     nameRU,
-    nameEN } = req.body;
+    nameEN,
+  } = req.body;
 
   Movies.create({
     country,
@@ -35,7 +36,8 @@ module.exports.createMovies = (req, res, next) => {
     movieId,
     nameRU,
     nameEN,
-    owner: req.user._id })
+    owner: req.user._id,
+  })
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
