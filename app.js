@@ -21,6 +21,8 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
 const options = {
   origin: [
     'http://localhost:3000',
+    'https://api.rakitskaya.movies.nomoredomains.work',
+    'http://api.rakitskaya.movies.nomoredomains.work',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
