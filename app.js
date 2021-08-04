@@ -23,6 +23,8 @@ const options = {
     'http://localhost:3000',
     'https://api.rakitskaya.movies.nomoredomains.work',
     'http://api.rakitskaya.movies.nomoredomains.work',
+    'https://rakitskaya.movies.nom.nomoredomains.rocks',
+    'http://rakitskaya.movies.nom.nomoredomains.rocks',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
